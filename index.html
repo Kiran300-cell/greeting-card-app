@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ═══════════════════════════════════════════════
+       PRIMARY SEO META TAGS
+  ═══════════════════════════════════════════════ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <title>CardCraft – Free Online Greeting Card Maker | Send Custom Cards Instantly</title>
+  <meta name="description" content="Create and send beautiful greeting cards online for birthdays, weddings, holidays, and more. Personalise your message, pick a theme, and share instantly — 100% free." />
+  <meta name="keywords" content="greeting card maker, online greeting cards, free e-cards, birthday card, wedding card, holiday card, personalised cards" />
+  <meta name="author" content="CardCraft" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://yourdomain.com/" />
+
+  <!-- ═══════════════════════════════════════════════
+       OPEN GRAPH (Facebook / LinkedIn)
+  ═══════════════════════════════════════════════ -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourdomain.com/" />
+  <meta property="og:title" content="CardCraft – Free Online Greeting Card Maker" />
+  <meta property="og:description" content="Design and send personalised greeting cards for any occasion in seconds. Beautiful themes, instant sharing." />
+  <meta property="og:image" content="https://yourdomain.com/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="CardCraft" />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- ═══════════════════════════════════════════════
+       TWITTER CARD
+  ═══════════════════════════════════════════════ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@cardcraft" />
+  <meta name="twitter:title" content="CardCraft – Free Online Greeting Card Maker" />
+  <meta name="twitter:description" content="Design and send beautiful personalised cards for birthdays, weddings, holidays and more." />
+  <meta name="twitter:image" content="https://yourdomain.com/og-image.jpg" />
+
+  <!-- ═══════════════════════════════════════════════
+       STRUCTURED DATA – WebApplication (JSON-LD)
+  ═══════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "CardCraft",
+    "url": "https://yourdomain.com/",
+    "description": "Create and send personalised greeting cards online for any occasion.",
+    "applicationCategory": "LifestyleApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "INR"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "CardCraft",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://yourdomain.com/logo.png"
+      }
+    }
+  }
+  </script>
+
+  <!-- ═══════════════════════════════════════════════
+       PERFORMANCE – Resource hints
+  ═══════════════════════════════════════════════ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- Favicon placeholder -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💌</text></svg>" />
+
+  <style>
+    /* ─── DESIGN TOKENS ─────────────────────────────── */
+    :root {
+      --ink:        #1a1018;
+      --parchment:  #fdf6ee;
+      --blush:      #e8816a;
+      --blush-dark: #c45f46;
+      --sage:       #4a7c6f;
+      --gold:       #c9a84c;
+      --mist:       #f4ede4;
+      --card-bg:    #ffffff;
+      --shadow:     0 8px 40px rgba(26,16,24,.12);
+      --radius:     18px;
+      --ff-display: 'Playfair Display', Georgia, serif;
+      --ff-body:    'DM Sans', sans-serif;
+      --transition: .3s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ─── RESET & BASE ──────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--ff-body);
+      background: var(--parchment);
+      color: var(--ink);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ─── DECORATIVE BACKGROUND ─────────────────────── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 10% 10%, rgba(232,129,106,.18) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 90% 80%, rgba(74,124,111,.14) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 30% at 50% 50%, rgba(201,168,76,.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── LAYOUT ────────────────────────────────────── */
+    .page-wrap { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+
+    /* ─── HEADER ────────────────────────────────────── */
+    header { text-align: center; padding: 3rem 0 2.5rem; }
+    .logo-mark { font-size: 2.8rem; display: block; margin-bottom: .5rem; line-height: 1; }
+    header h1 {
+      font-family: var(--ff-display);
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      background: linear-gradient(135deg, var(--blush) 0%, var(--gold) 60%, var(--sage) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+    }
+    header p.tagline {
+      font-size: 1.05rem;
+      color: #7a6670;
+      margin-top: .75rem;
+      font-weight: 300;
+    }
+
+    /* ─── BREADCRUMB (SEO) ──────────────────────────── */
+    nav.breadcrumb {
+      font-size: .8rem;
+      color: #9e8a95;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    nav.breadcrumb a { color: var(--blush); text-decoration: none; }
+    nav.breadcrumb a:hover { text-decoration: underline; }
+
+    /* ─── STEP LABELS ───────────────────────────────── */
+    .step-label {
+      font-size: .7rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--blush);
+      margin-bottom: .6rem;
+      display: block;
+    }
+
+    /* ─── OCCASION TABS ─────────────────────────────── */
+    .occasion-grid {
+      display: flex; gap: .6rem; flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .occ-btn {
+      border: 1.5px solid #e2d5cc;
+      background: white;
+      border-radius: 50px;
+      padding: .45rem 1.1rem;
+      font-family: var(--ff-body);
+      font-size: .85rem;
+      cursor: pointer;
+      color: #7a6670;
+      transition: var(--transition);
+    }
+    .occ-btn:hover { border-color: var(--blush); color: var(--blush); }
+    .occ-btn.active {
+      background: var(--blush); color: white;
+      border-color: var(--blush);
+      box-shadow: 0 4px 14px rgba(232,129,106,.35);
+    }
+
+    /* ─── MAIN GRID ─────────────────────────────────── */
+    .builder-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 640px) { .builder-grid { grid-template-columns: 1fr; } }
+
+    /* ─── PANEL / CARD ──────────────────────────────── */
+    .panel {
+      background: white;
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,.8);
+    }
+    .panel h2 {
+      font-family: var(--ff-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1.4rem;
+      color: var(--ink);
+    }
+
+    /* ─── FORM FIELDS ───────────────────────────────── */
+    .field { margin-bottom: 1.2rem; }
+    label { font-size: .82rem; font-weight: 500; color: #7a6670; display: block; margin-bottom: .35rem; }
+    input[type="text"], input[type="email"], textarea, select {
+      width: 100%;
+      border: 1.5px solid #ead9d0;
+      border-radius: 10px;
+      padding: .65rem .9rem;
+      font-family: var(--ff-body);
+      font-size: .92rem;
+      color: var(--ink);
+      background: var(--mist);
+      transition: var(--transition);
+      outline: none;
+      resize: none;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--blush);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(232,129,106,.15);
+    }
+    textarea { min-height: 100px; }
+    select { cursor: pointer; }
+
+    /* ─── THEME SWATCHES ────────────────────────────── */
+    .swatch-row { display: flex; gap: .6rem; flex-wrap: wrap; }
+    .swatch {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: var(--transition);
+      position: relative;
+    }
+    .swatch:hover { transform: scale(1.15); }
+    .swatch.selected { border-color: var(--ink); box-shadow: 0 0 0 2px white inset; }
+
+    /* ─── GENERATE BUTTON ───────────────────────────── */
+    .btn-generate {
+      width: 100%;
+      margin-top: 1.4rem;
+      padding: .9rem;
+      background: linear-gradient(135deg, var(--blush), var(--blush-dark));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-family: var(--ff-body);
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 18px rgba(196,95,70,.35);
+      letter-spacing: .02em;
+    }
+    .btn-generate:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(196,95,70,.45);
+    }
+    .btn-generate:active { transform: translateY(0); }
+    .btn-generate:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+    /* ─── LOADING SPINNER ───────────────────────────── */
+    .spinner {
+      display: inline-block;
+      width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,.4);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      vertical-align: middle;
+      margin-right: .4rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── AJAX STATUS ───────────────────────────────── */
+    #ajax-status {
+      font-size: .78rem;
+      margin-top: .6rem;
+      min-height: 1.2em;
+      transition: var(--transition);
+    }
+    .status-loading { color: var(--gold); }
+    .status-success { color: var(--sage); }
+    .status-error   { color: #c0392b; }
+
+    /* ─── PREVIEW CARD ──────────────────────────────── */
+    #preview-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      min-height: 340px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      position: relative;
+      transition: background var(--transition), color var(--transition);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+    #preview-card .card-emoji  { font-size: 3.2rem; margin-bottom: .8rem; display: block; }
+    #preview-card .card-to     { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; opacity: .6; margin-bottom: .2rem; }
+    #preview-card .card-title  { font-family: var(--ff-display); font-size: 1.7rem; font-weight: 700; line-height: 1.2; margin-bottom: 1rem; }
+    #preview-card .card-msg    { font-size: .94rem; line-height: 1.65; opacity: .85; max-width: 28ch; }
+    #preview-card .card-from   { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; opacity: .55; margin-top: 1.2rem; }
+    #preview-card .card-ribbon {
+      position: absolute; top: 0; left: 0; right: 0; height: 5px;
+      background: linear-gradient(90deg, var(--blush), var(--gold), var(--sage));
+    }
+
+    /* ─── SHARE ROW ─────────────────────────────────── */
+    .share-row {
+      display: flex; gap: .7rem; margin-top: 1.2rem; flex-wrap: wrap;
+    }
+    .btn-share {
+      flex: 1;
+      padding: .65rem .8rem;
+      border-radius: 10px;
+      border: 1.5px solid #ead9d0;
+      background: white;
+      font-family: var(--ff-body);
+      font-size: .82rem;
+      cursor: pointer;
+      color: #7a6670;
+      transition: var(--transition);
+      text-align: center;
+    }
+    .btn-share:hover { border-color: var(--blush); color: var(--blush); background: #fff5f2; }
+
+    /* ─── TOAST ─────────────────────────────────────── */
+    #toast {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: var(--ink); color: white;
+      padding: .75rem 1.6rem;
+      border-radius: 50px;
+      font-size: .88rem;
+      opacity: 0;
+      transition: opacity .3s, transform .3s;
+      pointer-events: none;
+      z-index: 999;
+      white-space: nowrap;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ─── FEATURES SECTION (SEO content) ───────────────── */
+    .features {
+      margin-top: 4rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+    }
+    .feature-card {
+      background: white;
+      border-radius: 14px;
+      padding: 1.4rem 1.2rem;
+      box-shadow: 0 4px 20px rgba(26,16,24,.07);
+      border: 1px solid #f0e5de;
+    }
+    .feature-card .icon { font-size: 1.8rem; margin-bottom: .6rem; }
+    .feature-card h3 { font-family: var(--ff-display); font-size: 1rem; font-weight: 700; margin-bottom: .3rem; }
+    .feature-card p  { font-size: .82rem; color: #7a6670; line-height: 1.5; }
+
+    /* ─── FAQ (SEO rich content) ────────────────────── */
+    .faq { margin-top: 3.5rem; }
+    .faq h2 {
+      font-family: var(--ff-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1.4rem;
+      text-align: center;
+    }
+    details {
+      background: white;
+      border-radius: 12px;
+      border: 1px solid #f0e5de;
+      padding: 1rem 1.3rem;
+      margin-bottom: .8rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    details[open] { box-shadow: 0 4px 16px rgba(26,16,24,.08); }
+    summary {
+      font-weight: 500; font-size: .95rem;
+      list-style: none;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    summary::after { content: '+'; font-size: 1.2rem; color: var(--blush); }
+    details[open] summary::after { content: '−'; }
+    details p { font-size: .87rem; color: #7a6670; margin-top: .7rem; line-height: 1.65; }
+
+    /* ─── FOOTER ────────────────────────────────────── */
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      font-size: .78rem;
+      color: #b0a0a8;
+      padding-bottom: 2rem;
+    }
+    footer a { color: var(--blush); text-decoration: none; }
+
+    /* ─── ANIMATION ─────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .panel, #preview-card { animation: fadeUp .6s ease both; }
+    .panel:nth-child(2)    { animation-delay: .1s; }
+  </style>
+</head>
+
+<body>
+  <!-- ═══════════════════════════════════════════════════
+       STRUCTURED DATA – BreadcrumbList
+  ═══════════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://yourdomain.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Greeting Card Maker", "item": "https://yourdomain.com/greeting-card-maker" }
+    ]
+  }
+  </script>
+
+  <!-- ═══════════════════════════════════════════════════
+       FAQ STRUCTURED DATA
+  ═══════════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is CardCraft free to use?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes! CardCraft is completely free. Create, personalise, and share greeting cards without any charges." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I send a greeting card by email?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. After generating your card you can copy the shareable link or use the email option to send it directly." }
+      },
+      {
+        "@type": "Question",
+        "name": "What occasions does CardCraft support?",
+        "acceptedAnswer": { "@type": "Answer", "text": "CardCraft supports birthdays, weddings, festivals, love, thank you, and condolence occasions, with more themes being added regularly." }
+      }
+    ]
+  }
+  </script>
+
+  <div class="page-wrap">
+
+    <!-- HEADER -->
+    <header>
+      <span class="logo-mark" aria-hidden="true">💌</span>
+      <h1>CardCraft</h1>
+      <p class="tagline">Design beautiful greeting cards in seconds &amp; share them with the world.</p>
+    </header>
+
+    <!-- BREADCRUMB NAV (SEO) -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a> &rsaquo; <span aria-current="page">Greeting Card Maker</span>
+    </nav>
+
+    <!-- OCCASION TABS -->
+    <div role="group" aria-label="Select occasion">
+      <span class="step-label">Choose an occasion</span>
+      <div class="occasion-grid" id="occasion-grid">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+
+    <!-- BUILDER GRID -->
+    <main class="builder-grid" id="main-content">
+
+      <!-- LEFT: FORM -->
+      <section class="panel" aria-label="Card details form">
+        <h2>Personalise your card</h2>
+
+        <div class="field">
+          <label for="to-name">To</label>
+          <input type="text" id="to-name" name="to" placeholder="Recipient's name" maxlength="60" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label for="from-name">From</label>
+          <input type="text" id="from-name" name="from" placeholder="Your name" maxlength="60" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label for="card-message">Your message</label>
+          <textarea id="card-message" name="message" placeholder="Write a heartfelt note…" maxlength="300"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Theme colour</label>
+          <div class="swatch-row" id="swatch-row" role="radiogroup" aria-label="Theme colour picker">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+        <button class="btn-generate" id="btn-generate" type="button" aria-live="polite">
+          ✨ Generate Card
+        </button>
+        <div id="ajax-status" role="status" aria-live="polite"></div>
+      </section>
+
+      <!-- RIGHT: PREVIEW -->
+      <section class="panel" aria-label="Card preview" style="padding:0;overflow:hidden;">
+        <div id="preview-card">
+          <div class="card-ribbon"></div>
+          <span class="card-emoji" id="prev-emoji">💌</span>
+          <span class="card-to" id="prev-to"></span>
+          <div class="card-title" id="prev-title">Your card will appear here</div>
+          <p class="card-msg" id="prev-msg">Fill in the form and click <em>Generate Card</em> to see a live preview of your personalised greeting.</p>
+          <span class="card-from" id="prev-from"></span>
+        </div>
+
+        <div class="share-row" id="share-row" style="padding:0 1.4rem 1.4rem;">
+          <button class="btn-share" id="btn-copy" title="Copy shareable link">🔗 Copy Link</button>
+          <button class="btn-share" id="btn-whatsapp" title="Share on WhatsApp">💬 WhatsApp</button>
+          <button class="btn-share" id="btn-email" title="Share via email">📧 Email</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- FEATURES (SEO rich content) -->
+    <section class="features" aria-label="App features">
+      <article class="feature-card">
+        <div class="icon">🎨</div>
+        <h3>Beautiful Themes</h3>
+        <p>Choose from curated colour palettes crafted for every mood and occasion.</p>
+      </article>
+      <article class="feature-card">
+        <div class="icon">⚡</div>
+        <h3>Instant Sharing</h3>
+        <p>Share via WhatsApp, email, or a unique link — no sign-up required.</p>
+      </article>
+      <article class="feature-card">
+        <div class="icon">📱</div>
+        <h3>Mobile Ready</h3>
+        <p>Fully responsive on every screen size, from desktop to phone.</p>
+      </article>
+      <article class="feature-card">
+        <div class="icon">🆓</div>
+        <h3>Always Free</h3>
+        <p>No hidden costs. Create unlimited cards at zero charge, forever.</p>
+      </article>
+    </section>
+
+    <!-- FAQ (SEO rich content) -->
+    <section class="faq">
+      <h2>Frequently Asked Questions</h2>
+
+      <details>
+        <summary>Is CardCraft free to use?</summary>
+        <p>Yes! CardCraft is completely free. Create, personalise, and share greeting cards without any charges, watermarks, or hidden fees.</p>
+      </details>
+      <details>
+        <summary>Can I send a greeting card by email?</summary>
+        <p>Absolutely. After generating your card you can copy the shareable link or use the email button to open your mail client with the message pre-filled.</p>
+      </details>
+      <details>
+        <summary>What occasions does CardCraft support?</summary>
+        <p>CardCraft currently supports Birthday, Wedding, Festival, Love, Thank You, and Condolence occasions, with more themes being added regularly.</p>
+      </details>
+      <details>
+        <summary>Does the card save automatically?</summary>
+        <p>Cards are generated on the fly and encoded in the shareable URL, so you can bookmark or share them without needing an account.</p>
+      </details>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>&copy; 2026 CardCraft &middot; <a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms of Use</a> &middot; Made with ❤️ in India</p>
+    </footer>
+
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" role="alert" aria-live="assertive"></div>
+
+  <!-- ═══════════════════════════════════════════════════
+       JAVASCRIPT — AJAX + LOGIC
+  ═══════════════════════════════════════════════════ -->
+  <script>
+    /* ── DATA ──────────────────────────────────────── */
+    const OCCASIONS = [
+      { key: 'birthday',     label: '🎂 Birthday',    emoji: '🎂', headline: 'Happy Birthday!' },
+      { key: 'wedding',      label: '💍 Wedding',     emoji: '💍', headline: 'Congratulations!' },
+      { key: 'festival',     label: '🪔 Festival',    emoji: '🪔', headline: 'Season\'s Greetings!' },
+      { key: 'love',         label: '❤️ Love',        emoji: '❤️', headline: 'Thinking of You' },
+      { key: 'thankyou',     label: '🙏 Thank You',   emoji: '🙏', headline: 'Thank You!' },
+      { key: 'condolence',   label: '🕊️ Condolence', emoji: '🕊️', headline: 'With Deepest Sympathy' },
+    ];
+
+    const THEMES = [
+      { name: 'Blush',    bg: '#fff0ed', text: '#3d1a12', accent: '#e8816a' },
+      { name: 'Sage',     bg: '#edf5f3', text: '#132e27', accent: '#4a7c6f' },
+      { name: 'Midnight', bg: '#1a1a2e', text: '#e0dff7', accent: '#9c7be8' },
+      { name: 'Gold',     bg: '#fdf3e1', text: '#2e2000', accent: '#c9a84c' },
+      { name: 'Rose',     bg: '#fdeef4', text: '#3d0020', accent: '#e8609a' },
+      { name: 'Sky',      bg: '#eaf4ff', text: '#0a2540', accent: '#3b82f6' },
+    ];
+
+    /* Simulated AJAX endpoint data (replace with a real API URL in production) */
+    const MOCK_API_URL = null; // set to your API endpoint string to enable live fetch
+
+    let selectedOccasion = OCCASIONS[0];
+    let selectedTheme    = THEMES[0];
+
+    /* ── DOM REFS ──────────────────────────────────── */
+    const $occGrid  = document.getElementById('occasion-grid');
+    const $swatches = document.getElementById('swatch-row');
+    const $btn      = document.getElementById('btn-generate');
+    const $status   = document.getElementById('ajax-status');
+    const $preview  = document.getElementById('preview-card');
+    const $toast    = document.getElementById('toast');
+
+    /* ── BUILD OCCASION TABS ───────────────────────── */
+    OCCASIONS.forEach(occ => {
+      const btn = document.createElement('button');
+      btn.className = 'occ-btn' + (occ.key === selectedOccasion.key ? ' active' : '');
+      btn.textContent = occ.label;
+      btn.setAttribute('aria-pressed', occ.key === selectedOccasion.key);
+      btn.addEventListener('click', () => {
+        selectedOccasion = occ;
+        document.querySelectorAll('.occ-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+      });
+      $occGrid.appendChild(btn);
+    });
+
+    /* ── BUILD SWATCHES ────────────────────────────── */
+    THEMES.forEach((theme, idx) => {
+      const sw = document.createElement('button');
+      sw.className = 'swatch' + (idx === 0 ? ' selected' : '');
+      sw.style.background = theme.accent;
+      sw.title = theme.name;
+      sw.setAttribute('role', 'radio');
+      sw.setAttribute('aria-checked', idx === 0);
+      sw.setAttribute('aria-label', theme.name + ' theme');
+      sw.addEventListener('click', () => {
+        selectedTheme = theme;
+        document.querySelectorAll('.swatch').forEach(s => { s.classList.remove('selected'); s.setAttribute('aria-checked','false'); });
+        sw.classList.add('selected');
+        sw.setAttribute('aria-checked', 'true');
+      });
+      $swatches.appendChild(sw);
+    });
+
+    /* ── AJAX FETCH HELPER ─────────────────────────── */
+    /**
+     * Performs an asynchronous XMLHttpRequest (AJAX).
+     * Falls back to mock data if no real API is configured.
+     */
+    function ajaxFetch(url, payload) {
+      return new Promise((resolve, reject) => {
+        if (!url) {
+          /* Simulate network latency with mock response */
+          setTimeout(() => {
+            resolve({ ok: true, data: payload });
+          }, 900);
+          return;
+        }
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', url, true);
+        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        xhr.timeout = 10000;
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState !== 4) return;
+          if (xhr.status >= 200 && xhr.status < 300) {
+            try {
+              resolve({ ok: true, data: JSON.parse(xhr.responseText) });
+            } catch (e) {
+              reject(new Error('Invalid JSON response from server.'));
+            }
+          } else {
+            reject(new Error(`Server error ${xhr.status}: ${xhr.statusText}`));
+          }
+        };
+
+        xhr.ontimeout = () => reject(new Error('Request timed out. Please try again.'));
+        xhr.onerror  = () => reject(new Error('Network error. Check your connection.'));
+
+        xhr.send(JSON.stringify(payload));
+      });
+    }
+
+    /* ── RENDER PREVIEW ────────────────────────────── */
+    function renderCard({ to, from, message, occasion, theme }) {
+      const card = document.getElementById('preview-card');
+      card.style.background = theme.bg;
+      card.style.color      = theme.text;
+      card.style.setProperty('--accent', theme.accent);
+      card.querySelector('.card-ribbon').style.background =
+        `linear-gradient(90deg, ${theme.accent}, ${theme.bg}, ${theme.accent})`;
+
+      document.getElementById('prev-emoji').textContent  = occasion.emoji;
+      document.getElementById('prev-to').textContent     = to   ? `To: ${to}`   : '';
+      document.getElementById('prev-title').textContent  = occasion.headline;
+      document.getElementById('prev-msg').textContent    = message || 'Wishing you all the joy in the world! 🎉';
+      document.getElementById('prev-from').textContent   = from ? `— ${from}` : '';
+
+      card.style.animation = 'none';
+      requestAnimationFrame(() => {
+        card.style.animation = 'fadeUp .5s ease both';
+      });
+    }
+
+    /* ── SET STATUS ────────────────────────────────── */
+    function setStatus(msg, type) {
+      $status.textContent = msg;
+      $status.className   = type ? `status-${type}` : '';
+    }
+
+    /* ── SHOW TOAST ────────────────────────────────── */
+    function showToast(msg) {
+      $toast.textContent = msg;
+      $toast.classList.add('show');
+      setTimeout(() => $toast.classList.remove('show'), 2500);
+    }
+
+    /* ── MAIN: GENERATE BUTTON ─────────────────────── */
+    $btn.addEventListener('click', async () => {
+      const to      = document.getElementById('to-name').value.trim();
+      const from    = document.getElementById('from-name').value.trim();
+      const message = document.getElementById('card-message').value.trim();
+
+      if (!to && !message) {
+        setStatus('Please enter at least a recipient name or a message.', 'error');
+        return;
+      }
+
+      /* UI: loading state */
+      $btn.disabled   = true;
+      $btn.innerHTML  = '<span class="spinner"></span>Creating your card…';
+      setStatus('Sending your card details via AJAX…', 'loading');
+
+      const payload = {
+        to, from, message,
+        occasion : selectedOccasion.key,
+        theme    : selectedTheme.name,
+        timestamp: new Date().toISOString(),
+      };
+
+      try {
+        const result = await ajaxFetch(MOCK_API_URL, payload);
+
+        if (result.ok) {
+          renderCard({ to, from, message, occasion: selectedOccasion, theme: selectedTheme });
+          setStatus('✓ Card generated successfully!', 'success');
+
+          /* Encode card state in URL hash for shareability */
+          const encoded = btoa(unescape(encodeURIComponent(JSON.stringify({ to, from, message, occ: selectedOccasion.key, th: selectedTheme.name }))));
+          history.replaceState(null, '', '#' + encoded);
+        }
+      } catch (err) {
+        setStatus(`Error: ${err.message}`, 'error');
+      } finally {
+        $btn.disabled  = false;
+        $btn.innerHTML = '✨ Generate Card';
+      }
+    });
+
+    /* ── SHARE ACTIONS ─────────────────────────────── */
+    document.getElementById('btn-copy').addEventListener('click', () => {
+      const url = window.location.href;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(() => showToast('🔗 Link copied to clipboard!'));
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = url; document.body.appendChild(ta);
+        ta.select(); document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast('🔗 Link copied!');
+      }
+    });
+
+    document.getElementById('btn-whatsapp').addEventListener('click', () => {
+      const to  = document.getElementById('to-name').value.trim() || 'you';
+      const msg = encodeURIComponent(`Hey ${to}! I made you a greeting card 💌 ${window.location.href}`);
+      window.open(`https://wa.me/?text=${msg}`, '_blank', 'noopener');
+    });
+
+    document.getElementById('btn-email').addEventListener('click', () => {
+      const to      = document.getElementById('to-name').value.trim() || '';
+      const subject = encodeURIComponent(`A greeting card for you from CardCraft`);
+      const body    = encodeURIComponent(`Hi ${to},\n\nI created a greeting card for you!\n\n${window.location.href}\n\nWith love 💌`);
+      window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    });
+
+    /* ── RESTORE CARD FROM URL HASH ────────────────── */
+    (function restoreFromHash() {
+      const hash = window.location.hash.slice(1);
+      if (!hash) return;
+      try {
+        const data = JSON.parse(decodeURIComponent(escape(atob(hash))));
+        document.getElementById('to-name').value      = data.to   || '';
+        document.getElementById('from-name').value    = data.from || '';
+        document.getElementById('card-message').value = data.message || '';
+
+        selectedOccasion = OCCASIONS.find(o => o.key === data.occ) || OCCASIONS[0];
+        selectedTheme    = THEMES.find(t => t.name === data.th)    || THEMES[0];
+
+        document.querySelectorAll('.occ-btn').forEach((b, i) => {
+          const active = OCCASIONS[i].key === selectedOccasion.key;
+          b.classList.toggle('active', active);
+          b.setAttribute('aria-pressed', active);
+        });
+
+        renderCard({ to: data.to, from: data.from, message: data.message, occasion: selectedOccasion, theme: selectedTheme });
+      } catch (_) { /* malformed hash — ignore */ }
+    })();
+  </script>
+</body>
+</html>
